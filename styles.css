@@ -1,0 +1,455 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body{
+    background: #1a1a1a;
+    color: #fff;
+    line-height: 1.6;
+    min-height: 100vh;
+
+    
+    padding-top: 60px;
+    padding-bottom: 0px;
+    box-sizing: border-box;
+    margin: 0;
+}
+body.light-mode{
+    background: #f0f0f0;
+    color: #000;
+}
+.page-wrapper{
+    flex: 1 0 auto;
+}
+
+ .nav-toggle, .mode-toggle, .search-container{
+    position: sticky;
+}
+
+/* Navigation Bar */
+.nav-container{
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 195px;
+    height: 100%;
+    background: #2d2d2d;
+    transition: 0.3s ease;
+    z-index: 1000;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    padding: 0;
+    margin: 0;
+}
+.nav-container.active{
+    left: 0;
+}
+/*navigation bar icon*/
+.nav-toggle{
+    position: fixed;
+    left: 20px;
+    top: 10px;
+    font-size: 24px;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 1001;
+}
+.nav-toggle:hover{
+    background-color: #2d2d2d;
+}
+/*nav menu*/
+.nav-menu{
+    padding: 60px 20px 20px;
+    width: 100%;
+}
+.nav-menu h2{
+    margin-bottom: 20px;
+    color: #fff;
+    white-space: nowrap; /* Prevent "Categories" from wrapping */
+    padding-top: 20px;
+}
+body.light-mode .nav-menu h2{
+    color: #000000;
+    white-space: nowrap;
+}
+.nav-menu ul{
+    list-style: none;
+}
+.nav-menu li{
+    margin: 15px 0;
+}
+.nav-menu a{
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+    word-wrap: break-word; /* Ensure long category names wrap */
+}
+body.light-mode .nav-menu a{
+    color: #000;
+}
+.nav-menu a:hover{
+    color: #fff;
+    padding-left: 10px;
+}
+body.light-mode .nav-menu a:hover{
+    color: #333;
+}
+/*.nav-menu a.page.active{
+    color: #fff;
+    background: #404040;
+    padding: 5px 10px;
+    border-radius: 5px;
+} */
+
+.nav-menu a.active{
+    color: #fff;
+    background: #404040;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+body.light-menu .nav-menu a.active{
+    color: #000;
+    background: #ddd;
+}
+/*mode color*/
+.mode-toggle{
+    position: fixed;
+    right: 20px;
+    top: 12px;
+    background: #2d2d2d;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: 0.3s;
+    height: 50px;
+}
+body.light-mode .mode-toggle{
+    color: #000;
+}
+.mode-toggle:hover{
+    background: #666;
+}
+body.light-mode .nav-container, body.light-mode .ai-card, body.light-mode .footer{
+    background: #fff;
+    border-color: #ccc;
+}
+body.light-mode #searchBar{
+    background: #ddd;
+    color: #333;
+}
+/* Main Content */
+.main-content{
+    margin-left: 60px;
+    padding: 20px;
+    transition: 0.3s ease;
+}
+.main-content.shifted{
+    margin-left: 310px;
+    display: flex;
+    flex-direction: column;
+}
+/* Search Bar */
+.search-container{
+    position: sticky;
+    margin-top: 10px;
+    margin-bottom: 10px  ; /* Move up and center */
+    background: #1a1a1a;
+    padding: 10px;
+    width: 500px;
+    padding-left: 599px;
+    
+
+}
+body.light-mode .search-container{
+    background-color: #f0f0f0;
+
+}
+#searchBar{
+    height: 50px;
+    width: 600px;
+    max-width: 350px; /* Slightly wider */
+    padding: 10px;
+    background: #333;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    align-items: center;
+    
+}
+body.light-mode #searchBar{
+    background: #d7d5d5;
+    color: #000000;
+}
+/* AI Websites Grid */
+.ai-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    transition: 0.3s ease;
+    margin-right: 60px;
+    align-content: start;
+}
+.ai-grid p{
+    color: #ffffff;
+}
+body.light-mode .ai-grid p{
+    color: #1a1a1a;
+}
+.main-content.shifted .ai-grid{
+    grid-template-columns: 1fr;
+}
+.ai-card{
+    position: relative;
+    background: #2d2d2d;
+    border-radius: 25px;
+    padding: 20px;
+    margin-top: 15px;
+    
+    transition: 0.3s ease;
+    gap: 2px;
+}
+.ai-card::after{
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    color: #c1c0c0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
+.ai-card:hover::after{
+    opacity: 1;
+    visibility: visible;
+    color: #939292;
+}
+.ai-card h3{
+    margin-bottom: 10px;
+}
+body.light-mode .ai-card h3{
+    color: #000;
+}
+.ai-card a{
+    color: #ccc;
+    text-decoration: none;
+}
+body.light-mode .ai-card p{
+    color: #000;
+}
+.ai-card a{
+    color: #ccc;
+    text-decoration: none;
+}
+body.light-mode .ai-card a{
+    color: #000;
+}
+.ai-card a:hover{
+    color: #fff;
+}
+body.light-mode .ai-card a:hover{
+    color: #000;
+}
+
+/*result*/
+.no-results{
+    display: none;
+    text-align: center;
+    padding: 20px;
+    color: #ccc;
+}
+body.light-mode .no-results{
+    color: #000;
+}
+
+/*scroll down btn*/
+.scroll-up-btn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 30%;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    transition: 0.3s ease;
+}
+.scroll-up-btn:hover{
+    background-color: #666;
+}
+/*footer*/
+.footer{
+    background: #2d2d2d;
+    padding: 20px;
+    margin-top: 50px;
+    text-align: center;
+    border-top: 1px solid #404040;
+    
+    border-radius: 10px;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 60px;
+}
+.footer-content{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.footer-link{
+    cursor: pointer;
+}
+.footer p{
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 10px;
+}body.light-mode .footer p{
+    color: #000;
+}
+.footer-links a {
+    color: #ccc;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: 0.3s;
+}
+body.light-mode .footer-links a{
+    color: #000;
+}
+.footer-links a:hover{
+    color: #fff;
+}
+body.light-mode .footer-links a:hover{
+    color: #333;
+}
+
+/*pages*/
+.page{
+    display: none;
+    margin-left: 60px;
+    padding: 20px;
+}
+.page.active{
+    display: block;
+}
+.page h1{
+    margin-bottom: 20px;
+}
+body.light-mode .page h1{
+    color: #000;
+}
+.page p{
+    margin-bottom: 15px;
+    color: #ccc;
+}
+body.light-mode .page p{
+    color: #000;
+}
+.page a{
+    color: #fff;
+    text-decoration: none;
+}
+body.light-mode .page a{
+    color: #000;
+}
+.page a:hover{
+    text-decoration: underline;
+}
+body.light-mode .page:hover{
+    color: #333;
+}
+.dd{
+    text-align: center;
+}/*back btn*/
+.back-btn{
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s ease;
+}
+.back-btn:hover{
+    background: #666;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-container {
+        width: 200px;
+        left: -200px;
+    }
+    .nav-container .active{
+        left: 0;
+    }
+    .main-content.shifted {
+        margin-left: 260px;
+    }
+    .search-container{
+        margin-bottom: 10px;
+        height: 40px;
+        width: 500px;
+        
+        margin-top: 30px;
+        padding-left: 125px;
+        margin-bottom: 50px;
+    }
+    .ai-grid{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    .ai-card{
+        padding: 25px;
+        margin-top: 20px;
+        border-radius: 30px;
+    }
+    .main-content.shifted .ai-card{
+        padding: 15px;
+        margin-top: 15px;
+        border-radius: 20px;
+    }
+    #searchBar {
+
+        max-width: 243px;
+        padding-bottom: 10px;
+       
+    }
+    .footer-links a {
+        display: block;
+        margin: 10px 0;
+    }
+    .page{
+        margin-left: 20px;
+    }
+    .body{
+        padding-bottom: 70;
+    }
+    .footer{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-top: 0;
+        padding: 15px;
+    }
+    .scroll-up-btn{
+        bottom: 10px;
+        right: 10px;
+    }
+}
